@@ -1,16 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/item_afficher"
-        android:title="Afficher"
+        app:showAsAction="always"
+        android:title=""
+        android:icon="@drawable/more_vert"
+        >
 
-        />
+        <menu>
+        <item
+            android:id="@+id/item_afficher"
+            android:icon="@drawable/list_24"
+            android:title="Afficher"
+            app:showAsAction="never"
 
-    <item
-        android:id="@+id/item_ajout"
-        android:title="Ajouter"
+            />
 
-        />
+        <item
+            android:id="@+id/item_ajout"
+            android:icon="@drawable/circle_24"
+            android:title="Ajouter"
+            app:showAsAction="never"
+
+
+            />
+
+
+
+        </menu>
+
+
+    </item>
+
+
 
 </menu>
