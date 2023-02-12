@@ -72,7 +72,7 @@ public class First extends Fragment {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_first, container, false);
 
-        listView = v.findViewById(R.id.lv2);
+        listView = v.findViewById(R.id.lv);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://run.mocky.io/")
@@ -92,6 +92,8 @@ public class First extends Fragment {
 
                     MovieAdapter ma = new MovieAdapter(movies,getActivity(),R.layout.movie_item);
                     listView.setAdapter(ma);
+
+                    save_Localy(movies);
                 }
 
 
@@ -101,6 +103,16 @@ public class First extends Fragment {
             @Override
             public void onFailure(Call<List<Movie>> call, Throwable t) {
                 Toast.makeText(getActivity(), "Error contacting API", Toast.LENGTH_SHORT).show();
+            }
+
+            private void save_Localy(List<Movie> movies) {
+
+                DBHelper db = new DBHelper(getActivity());
+                db.clear_All();
+                for(Movie m : movies) {
+                    db.add_Movie(m);
+                }
+
             }
         });
 

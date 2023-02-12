@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +17,12 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class Second extends Fragment {
+
+
+    EditText id, nom ,image;
+    Button btn;
+
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +68,49 @@ public class Second extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second, container, false);
+        View v = inflater.inflate(R.layout.fragment_second, container, false);
+
+
+        id=v.findViewById(R.id.ed_id);
+        nom=v.findViewById(R.id.ed_nom);
+        image=v.findViewById(R.id.ed_image);
+        btn = v.findViewById(R.id.button);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DBHelper db = new DBHelper(getActivity());
+
+                int input_id=Integer.parseInt(id.getText().toString());
+
+                if(db.search(input_id)) Toast.makeText(getActivity(), "Cet id est déja affecté", Toast.LENGTH_LONG).show();
+
+                else {
+
+                    Movie m = new Movie();
+
+                    m.setId(input_id);
+
+                    m.setName(nom.getText().toString());
+
+                    m.setImage(image.getText().toString());
+
+                    long r = db.add_Movie(m);
+
+                    if (r != -1) {
+                        Toast.makeText(getActivity(), "Insertion Reussie", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getActivity(), "Insertion Echouée", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+            }
+        });
+
+
+
+
+        return v;
     }
 }

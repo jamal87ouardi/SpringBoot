@@ -56,6 +56,7 @@ public class MovieAdapter extends BaseAdapter {
         Movie m = listMovies.get(position);
 
         viewHolder.txt.setText(m.getName());
+
         Picasso.get().load(m.getImage()).into(viewHolder.img);
 
         return convertView;
