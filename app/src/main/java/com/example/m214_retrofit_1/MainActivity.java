@@ -32,11 +32,53 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://run.mocky.io/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        MovieApi movieApi = retrofit.create(MovieApi.class);
+
+        Call<List<Movie>> call = movieApi.getMovies();
+
+        call.enqueue(new Callback<List<Movie>>() {
+            @Override
+            public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
+                if(response.code()==200)
+                {
+                    List<Movie> movies = response.body();
+                    save_Localy(movies);
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Movie>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Error contacting API", Toast.LENGTH_SHORT).show();
+            }
+
+
+        });
+
+
+
 
         getSupportFragmentManager().beginTransaction().add(R.id.frameLayout, new First()).commit();
 
 
 
+
+    }
+
+    private void save_Localy(List<Movie> movies) {
+
+        DBHelper db = new DBHelper(getApplicationContext());
+        db.clear_All();
+        for(Movie m : movies) {
+            db.add_Movie(m);
+        }
 
     }
 

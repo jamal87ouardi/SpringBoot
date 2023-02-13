@@ -74,52 +74,13 @@ public class First extends Fragment {
 
         listView = v.findViewById(R.id.lv);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://run.mocky.io/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        DBHelper db = new DBHelper(getActivity());
 
-        MovieApi movieApi = retrofit.create(MovieApi.class);
+        List<Movie> movies = db.get_Movies();
 
-        Call<List<Movie>> call = movieApi.getMovies();
+        MovieAdapter ma = new MovieAdapter(movies,getActivity(),R.layout.movie_item);
 
-        call.enqueue(new Callback<List<Movie>>() {
-            @Override
-            public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
-                if(response.code()==200)
-                {
-                    List<Movie> movies = response.body();
-
-                    MovieAdapter ma = new MovieAdapter(movies,getActivity(),R.layout.movie_item);
-                    listView.setAdapter(ma);
-
-                    save_Localy(movies);
-                }
-
-
-
-            }
-
-            @Override
-            public void onFailure(Call<List<Movie>> call, Throwable t) {
-                Toast.makeText(getActivity(), "Error contacting API", Toast.LENGTH_SHORT).show();
-            }
-
-            private void save_Localy(List<Movie> movies) {
-
-                DBHelper db = new DBHelper(getActivity());
-                db.clear_All();
-                for(Movie m : movies) {
-                    db.add_Movie(m);
-                }
-
-            }
-        });
-
-
-
-
-
+        listView.setAdapter(ma);
 
         return v;
     }
