@@ -82,26 +82,42 @@ public class Second extends Fragment {
 
                 DBHelper db = new DBHelper(getActivity());
 
-                int input_id=Integer.parseInt(id.getText().toString());
 
-                if(db.search(input_id)) Toast.makeText(getActivity(), "Cet id est déja affecté", Toast.LENGTH_LONG).show();
+
+                String name = nom.getText().toString();
+
+                String url = image.getText().toString();
+
+                if (id.getText().toString().equals("") || name.equals("") || url.equals("")) {
+
+                    Toast.makeText(getActivity(), "Tous les champs sont requis", Toast.LENGTH_LONG).show();
+
+                }
 
                 else {
 
-                    Movie m = new Movie();
+                    int input_id = Integer.parseInt(id.getText().toString());
 
-                    m.setId(input_id);
+                    if (db.search(input_id))
+                        Toast.makeText(getActivity(), "ID éxiste déja", Toast.LENGTH_LONG).show();
 
-                    m.setName(nom.getText().toString());
+                    else {
 
-                    m.setImage(image.getText().toString());
+                        Movie m = new Movie();
 
-                    long r = db.add_Movie(m);
+                        m.setId(input_id);
 
-                    if (r != -1) {
-                        Toast.makeText(getActivity(), "Insertion Reussie", Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getActivity(), "Insertion Echouée", Toast.LENGTH_LONG).show();
+                        m.setName(name);
+
+                        m.setImage(url);
+
+                        long r = db.add_Movie(m);
+
+                        if (r != -1) {
+                            Toast.makeText(getActivity(), "Ajouté avec succès", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getActivity(), "Echec d'ajout", Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
 

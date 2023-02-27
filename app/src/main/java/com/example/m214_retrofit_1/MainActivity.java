@@ -24,7 +24,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
                 if(response.code()==200)
                 {
                     List<Movie> movies = response.body();
+
                     save_Localy(movies);
+
                 }
 
 
@@ -56,18 +57,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Movie>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "Error contacting API", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Echec de connexion", Toast.LENGTH_SHORT).show();
             }
 
 
         });
-
-
-
-
-        getSupportFragmentManager().beginTransaction().add(R.id.frameLayout, new First()).commit();
-
-
 
 
     }
@@ -100,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
                 getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new First()).commit();
                 return true;
+
             case R.id.item_ajout:
                 getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new Second()).commit();
                 return true;

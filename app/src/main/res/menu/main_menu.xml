@@ -5,26 +5,26 @@
     <item
         app:showAsAction="always"
         android:title=""
-        android:icon="@drawable/more_vert"
+        android:icon="@drawable/more_vert_24"
         >
 
         <menu>
-        <item
-            android:id="@+id/item_afficher"
-            android:icon="@drawable/list_24"
-            android:title="Afficher"
-            app:showAsAction="never"
+            <item
+                android:id="@+id/item_afficher"
+                android:icon="@drawable/list_24"
+                android:title="Afficher"
+                app:showAsAction="never"
 
-            />
+                />
 
-        <item
-            android:id="@+id/item_ajout"
-            android:icon="@drawable/circle_24"
-            android:title="Ajouter"
-            app:showAsAction="never"
+            <item
+                android:id="@+id/item_ajout"
+                android:icon="@drawable/circle_24"
+                android:title="Ajouter"
+                app:showAsAction="never"
 
 
-            />
+                />
 
 
 

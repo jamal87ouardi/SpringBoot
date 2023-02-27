@@ -13,7 +13,7 @@ import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
     public DBHelper(@Nullable Context context) {
-        super(context, "Movie_DB", null, 1);
+        super(context, "Movie_BDD", null, 2);
     }
 
     @Override
