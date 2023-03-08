@@ -2,18 +2,13 @@ package com.example.m214_retrofit_1;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ListView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -36,18 +31,18 @@ public class MainActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        MovieApi movieApi = retrofit.create(MovieApi.class);
+        BookApi bookApi = retrofit.create(BookApi.class);
 
-        Call<List<Movie>> call = movieApi.getMovies();
+        Call<List<Book>> call = bookApi.getBooks();
 
-        call.enqueue(new Callback<List<Movie>>() {
+        call.enqueue(new Callback<List<Book>>() {
             @Override
-            public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
+            public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
                 if(response.code()==200)
                 {
-                    List<Movie> movies = response.body();
+                    List<Book> books = response.body();
 
-                    save_Localy(movies);
+                    save_Localy(books);
 
                 }
 
@@ -56,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Movie>> call, Throwable t) {
+            public void onFailure(Call<List<Book>> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), "Echec de connexion", Toast.LENGTH_SHORT).show();
             }
 
@@ -66,12 +61,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void save_Localy(List<Movie> movies) {
+    private void save_Localy(List<Book> books) {
 
         DBHelper db = new DBHelper(getApplicationContext());
         db.clear_All();
-        for(Movie m : movies) {
-            db.add_Movie(m);
+        for(Book b : books) {
+            db.add_Book(b);
         }
 
     }
@@ -89,19 +84,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()) {
-
             case R.id.item_afficher:
-
-                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new First()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new Premier()).commit();
                 return true;
 
             case R.id.item_ajout:
-                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new Second()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new Deuxieme()).commit();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
 }

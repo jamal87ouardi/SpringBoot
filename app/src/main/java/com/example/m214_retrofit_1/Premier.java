@@ -6,23 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link First#newInstance} factory method to
+ * Use the {@link Premier#newInstance} factory method to
  * create an instance of this fragment.
  *
  */
-public class First extends Fragment {
+public class Premier extends Fragment {
 
     ListView listView;
 
@@ -44,8 +37,8 @@ public class First extends Fragment {
      * @return A new instance of fragment First.
      */
     // TODO: Rename and change types and number of parameters
-    public static First newInstance(String param1, String param2) {
-        First fragment = new First();
+    public static Premier newInstance(String param1, String param2) {
+        Premier fragment = new Premier();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -53,7 +46,7 @@ public class First extends Fragment {
         return fragment;
     }
 
-    public First() {
+    public Premier() {
         // Required empty public constructor
     }
 
@@ -70,15 +63,15 @@ public class First extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_first, container, false);
+        View v= inflater.inflate(R.layout.fragment_un, container, false);
 
         listView = v.findViewById(R.id.lv);
 
         DBHelper db = new DBHelper(getActivity());
 
-        List<Movie> movies = db.get_Movies();
+        List<Book> books = db.get_Books();
 
-        MovieAdapter ma = new MovieAdapter(movies,getActivity(),R.layout.movie_item);
+        BookAdapter ma = new BookAdapter(books,getActivity(),R.layout.book_item);
 
         listView.setAdapter(ma);
 

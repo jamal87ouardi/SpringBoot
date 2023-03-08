@@ -13,12 +13,12 @@ import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
     public DBHelper(@Nullable Context context) {
-        super(context, "Movie_BDD", null, 2);
+        super(context, "Book_BDD", null, 2);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String req = "CREATE TABLE Movie ( ID INTEGER PRIMARY KEY , Name TEXT,PRIX float, IMAGE text)";
+        String req = "CREATE TABLE Livre ( REF INTEGER PRIMARY KEY , TITRE TEXT, IMG TEXT)";
         db.execSQL(req);
 
     }
@@ -26,46 +26,37 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        db.execSQL("DROP TABLE IF EXISTS Movie");
+        db.execSQL("DROP TABLE IF EXISTS Livre");
 
         onCreate(db);
 
     }
 
-    public List<Movie> get_Movies() {
+    public List<Book> get_Books() {
 
         SQLiteDatabase db = this.getWritableDatabase();
+        List<Book> books = new ArrayList<>();
 
-        List<Movie> movies = new ArrayList<>();
-
-        Cursor cur = db.rawQuery("SELECT * FROM Movie",null);
+        Cursor cur = db.rawQuery("SELECT * FROM Livre",null);
         if(cur.moveToFirst()) {
             do {
-                Movie m = new Movie();
-
-               // m.ID=cur.getInt(0);
-               // p.NOM= cur.getString(1);
-                m.setId(cur.getInt(0));
-                m.setName(cur.getString(1));
-                m.setImage(cur.getString(3));
-                //p.PRIX= cur.getFloat(2);
-
-
-
-                movies.add(m);
+                Book m = new Book();
+                m.setRef(cur.getInt(0));
+                m.setTitre(cur.getString(1));
+                m.setImg(cur.getString(2));
+                books.add(m);
             } while (cur.moveToNext());
         }
-
-        return movies;
+        return books;
     }
 
-    public boolean search(int id) {
+    public boolean search(int ref) {
 
-        List<Movie> movies = get_Movies();
+        List<Book> books = get_Books();
         boolean exist = false;
-        for(Movie m : movies) {
+        for(Book b : books) {
 
-            if(m.getId()==id) exist=true;
+            if(b.getRef()==ref) exist=true;
 
         }
         return exist;
@@ -73,32 +64,22 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void clear_All() {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DROP TABLE IF EXISTS Movie");
+        db.execSQL("DROP TABLE IF EXISTS Livre");
         onCreate(db);
     }
 
-    public long add_Movie(Movie m) {
+    public long add_Book(Book b) {
 
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
 
-        values.put("ID", m.getId());
+        values.put("REF", b.getRef());
+        values.put("TITRE", b.getTitre());
+        values.put("IMG",b.getImg());
 
-        values.put("Name", m.getName());
-
-        values.put("PRIX",500);
-
-        values.put("IMAGE",m.getImage());
-
-        // Inserting Row
-        long r = db.insert("Movie", null, values);
-
-        // Closing database connection
+        long r = db.insert("Livre", null, values);
         db.close();
-
         return r;
-
     }
 
 }

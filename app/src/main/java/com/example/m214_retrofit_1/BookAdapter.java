@@ -12,14 +12,14 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class MovieAdapter extends BaseAdapter {
+public class BookAdapter extends BaseAdapter {
 
-    private List<Movie> listMovies;
+    private List<Book> listBooks;
     private Context mContext;
     private int layoutID;
 
-    public MovieAdapter(List<Movie> listMovies, Context mContext, int layoutID) {
-        this.listMovies = listMovies;
+    public BookAdapter(List<Book> listBooks, Context mContext, int layoutID) {
+        this.listBooks = listBooks;
         this.mContext = mContext;
         this.layoutID = layoutID;
     }
@@ -27,13 +27,13 @@ public class MovieAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         //Taille de la liste View
-        return listMovies.size();
+        return listBooks.size();
     }
 
     @Override
     public Object getItem(int position) {
 
-        return listMovies.get(position);
+        return listBooks.get(position);
     }
 
     @Override
@@ -53,11 +53,11 @@ public class MovieAdapter extends BaseAdapter {
         viewHolder.txt = convertView.findViewById(R.id.textView3);
         viewHolder.img = convertView.findViewById(R.id.imageView3);
 
-        Movie m = listMovies.get(position);
+        Book b = listBooks.get(position);
 
-        viewHolder.txt.setText(m.getName());
+        viewHolder.txt.setText(b.getTitre());
 
-        Picasso.get().load(m.getImage()).into(viewHolder.img);
+        Picasso.get().load(b.getImg()).into(viewHolder.img);
 
         return convertView;
     }

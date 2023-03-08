@@ -12,7 +12,7 @@
             <item
                 android:id="@+id/item_afficher"
                 android:icon="@drawable/list_24"
-                android:title="Afficher"
+                android:title="Show"
                 app:showAsAction="never"
 
                 />
@@ -20,7 +20,7 @@
             <item
                 android:id="@+id/item_ajout"
                 android:icon="@drawable/circle_24"
-                android:title="Ajouter"
+                android:title="Add"
                 app:showAsAction="never"
 
 

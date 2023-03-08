@@ -5,9 +5,9 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
-public interface MovieApi {
+public interface BookApi {
 
-    @GET("v3/45366348-4c96-4fe6-9ea2-5d68d8c426ea")
-    Call<List<Movie>> getMovies();
+    @GET("v3/fb184368-8cbe-48d6-ae6c-4a407f25b465")
+    Call<List<Book>> getBooks();
 
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Deuxieme">
+
+    <EditText
+        android:id="@+id/ed_ref"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="100dp"
+
+        android:background="@color/custom"
+        android:ems="10"
+        android:hint="Reference"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/ed_titre"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+
+        android:background="@color/custom"
+        android:ems="10"
+        android:hint="Titre"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/ed_img"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+
+        android:background="@color/custom"
+        android:ems="10"
+        android:hint="Image URL"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/button_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="140dp"
+        android:layout_marginTop="20dp"
+        android:text="Ajouter" />
+</LinearLayout>

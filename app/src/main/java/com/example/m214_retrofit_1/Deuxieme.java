@@ -13,13 +13,13 @@ import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link Second#newInstance} factory method to
+ * Use the {@link Deuxieme#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Second extends Fragment {
+public class Deuxieme extends Fragment {
 
 
-    EditText id, nom ,image;
+    EditText ref, titre ,img;
     Button btn;
 
 
@@ -33,7 +33,7 @@ public class Second extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Second() {
+    public Deuxieme() {
         // Required empty public constructor
     }
 
@@ -46,8 +46,8 @@ public class Second extends Fragment {
      * @return A new instance of fragment Second.
      */
     // TODO: Rename and change types and number of parameters
-    public static Second newInstance(String param1, String param2) {
-        Second fragment = new Second();
+    public static Deuxieme newInstance(String param1, String param2) {
+        Deuxieme fragment = new Deuxieme();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -68,13 +68,13 @@ public class Second extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_second, container, false);
+        View v = inflater.inflate(R.layout.fragment_deux, container, false);
 
 
-        id=v.findViewById(R.id.ed_id);
-        nom=v.findViewById(R.id.ed_nom);
-        image=v.findViewById(R.id.ed_image);
-        btn = v.findViewById(R.id.button);
+        ref=v.findViewById(R.id.ed_ref);
+        titre=v.findViewById(R.id.ed_titre);
+        img=v.findViewById(R.id.ed_img);
+        btn = v.findViewById(R.id.button_add);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,11 +84,11 @@ public class Second extends Fragment {
 
 
 
-                String name = nom.getText().toString();
+                String t = titre.getText().toString();
 
-                String url = image.getText().toString();
+                String url = img.getText().toString();
 
-                if (id.getText().toString().equals("") || name.equals("") || url.equals("")) {
+                if (ref.getText().toString().equals("") || t.equals("") || url.equals("")) {
 
                     Toast.makeText(getActivity(), "Tous les champs sont requis", Toast.LENGTH_LONG).show();
 
@@ -96,22 +96,22 @@ public class Second extends Fragment {
 
                 else {
 
-                    int input_id = Integer.parseInt(id.getText().toString());
+                    int input_id = Integer.parseInt(ref.getText().toString());
 
                     if (db.search(input_id))
-                        Toast.makeText(getActivity(), "ID éxiste déja", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Ref éxiste déja", Toast.LENGTH_LONG).show();
 
                     else {
 
-                        Movie m = new Movie();
+                        Book b = new Book();
 
-                        m.setId(input_id);
+                        b.setRef(input_id);
 
-                        m.setName(name);
+                        b.setTitre(t);
 
-                        m.setImage(url);
+                        b.setImg(url);
 
-                        long r = db.add_Movie(m);
+                        long r = db.add_Book(b);
 
                         if (r != -1) {
                             Toast.makeText(getActivity(), "Ajouté avec succès", Toast.LENGTH_LONG).show();
